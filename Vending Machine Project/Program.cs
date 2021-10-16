@@ -27,20 +27,8 @@ namespace Vending_Machine_Project
                 "1. Choose an item\n" +
                 "2. Exit");//To access the admin panel you enter 99 but that is not shown to the regular user for obvious reasons
             int choice = -1;
-
-            while (choice == -1)//Validation for when user chooses what they want to do
-            {
-                try
-                {
-                    choice = int.Parse(Console.ReadLine());
-                }
-                catch
-                {
-                    Console.WriteLine("Please Enter a valid number.");
-                    Welcome(VendingMachine);
-
-                }
-            }
+            IntValidation(ref choice, -1, "Please enter a valid number:");
+           
 
             int choice1 = -1;
             switch (choice)
@@ -63,6 +51,40 @@ namespace Vending_Machine_Project
                     break;
             }
         }
+
+        static void IntValidation(ref int validate, int condition, string message)
+        {
+            while(validate == condition)
+            {
+                try
+                {
+                    validate = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.Write(message);
+                    validate = condition;
+                }
+            }
+        }
+
+        static void DoubleValidation(ref double validate, double condition, string message)
+        {
+            while (validate == condition)
+            {
+                try
+                {
+                    validate = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.Write(message);
+                    validate = condition;
+                }
+            }
+        }
+
+
 
 
         static void ItemChoice(ref int choice, Vending[] VendingMachine)
@@ -117,18 +139,9 @@ namespace Vending_Machine_Project
             while (moneyTP > 0)
             {
                 Console.Write("\nInsert Coin:");
-                while (moneyInserted == -1)//Validation for user input
-                {
-                    try
-                    {
-                        moneyInserted = double.Parse(Console.ReadLine());
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Please enter a valid coin.");
-                        moneyInserted = -1;
-                    }
-                }
+                DoubleValidation(ref moneyInserted, -1, "Please enter a valid coin:");
+                
+                
                 switch (moneyInserted)//Makes sure that user enters a coin that the machine will accept
                 {
                     case 10:
